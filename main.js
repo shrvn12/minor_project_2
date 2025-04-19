@@ -73,7 +73,7 @@ mongoose.Promise = global.Promise;
 // Add Mongoose connection to Express.js
 mongoose.connect(
 // Set up the connection to your database.  
- "mongodb://0.0.0.0:27017/sysprodelec",
+ "mongodb://shravan:shravan@ac-ndrrxin-shard-00-00.rirtsdj.mongodb.net:27017,ac-ndrrxin-shard-00-01.rirtsdj.mongodb.net:27017,ac-ndrrxin-shard-00-02.rirtsdj.mongodb.net:27017/minor_project?ssl=true&replicaSet=atlas-13kcqd-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0",
 
  
   {// useNewUrlParser: true , // not longer neccesary
