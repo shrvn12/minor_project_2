@@ -268,7 +268,7 @@ const docDefinition = (data) => {
               width: 120,
             },
             {
-              text: 'Maktro Electronics Ltd.',
+              text: 'InManager Ltd.',
               style: 'title',
             },
             {
@@ -356,7 +356,7 @@ const docDefinition = (data) => {
       {
         columns: [
           {
-            text: `Authorized By\n\n\n___________________________\nMaktro Electronics Ltd.`,
+            text: `Authorized By\n\n\n___________________________\nInManager Ltd.`,
             style: 'generalText',
           },
           {
