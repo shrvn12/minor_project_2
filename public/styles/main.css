@@ -239,6 +239,7 @@ body {
 
 .table__body td {
   padding: 10px 15px;
+  text-align: left;
 }
 
 .table__actions a:not(:last-child) {

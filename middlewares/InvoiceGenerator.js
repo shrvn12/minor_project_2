@@ -14,7 +14,7 @@ const fonts = {
 
 const printer = new PdfPrinter(fonts);
 
-const docDefinition = (data) => {
+const docDefinition = (data, user) => {
   let tableBodyData = [];
   if (data.product) {
     tableBodyData.push([
@@ -422,14 +422,14 @@ const docDefinition = (data) => {
   };
 };
 
-const GenerateInvoice = async (id, type) => {
+const GenerateInvoice = async (id, type, user) => {
   let sale;
   if (type == 'payment') {
     sale = await Sale.findById(id).populate('customer');
   } else {
     sale = await Sale.findById(id).populate('product').populate('customer');
   }
-  let pdfDoc = await printer.createPdfKitDocument(docDefinition(sale));
+  let pdfDoc = await printer.createPdfKitDocument(docDefinition(sale, user));
   if (!fs.existsSync(`files/invoice/${id}.pdf`)) {
     pdfDoc.pipe(fs.createWriteStream(`files/invoice/${id}.pdf`));
     pdfDoc.end();

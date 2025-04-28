@@ -118,7 +118,7 @@ SaleController.create = async (req, res) => {
 
     await updateCustomerInfo(newSale.customer);
 
-    generateInvoice(newSale._id, '');
+    generateInvoice(newSale._id, '', req.session.user);
     req.flash(
       'success',
       `Congratulation on new Sales! Record has been added successfully.`
@@ -149,7 +149,7 @@ SaleController.addBalance = async (req, res) => {
 
     await updateCustomerInfo(newSale.customer);
 
-    generateInvoice(newSale._id, 'payment');
+    generateInvoice(newSale._id, 'payment', req.session.user);
     req.flash(
       'success',
       `Balance has been added successfully for "${getCustomer.name}".`
@@ -162,6 +162,7 @@ SaleController.addBalance = async (req, res) => {
 };
 
 SaleController.read = async (req, res) => {
+
   const perPage = 30;
   const page = req.params.page || 1;
   let sales = Sale.find({}).populate('product').populate('customer');
@@ -307,7 +308,7 @@ SaleController.update = async (req, res) => {
   );
 
   await updateCustomerInfo(updatedSale.customer);
-  generateInvoice(updatedSale._id, '');
+  generateInvoice(updatedSale._id, '', req.session.user);
   req.flash('success', `Sales information has been updated successfully!`);
   res.redirect('/sales');
 };

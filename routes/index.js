@@ -30,6 +30,7 @@ const
           apiRouter = require('./api/index'),
           productRouter = require('./product'),
           inventoryRouter = require('./inventory'),
+          productListRouter = require("./productList"),
           entryRouter = require('./entry'),
      
           servicingRouter = require('./servicing'),
@@ -63,6 +64,9 @@ const
 
          // inventories routes
          router.use('/inventories',PermissionHandler(['admin', 'inventory']),inventoryRouter);
+
+         // product list
+         router.use('/productList',productListRouter);
     
          // entries routes
          router.use('/entries', PermissionHandler(['admin', 'inventory']), entryRouter);

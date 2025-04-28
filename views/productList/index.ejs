@@ -1,0 +1,18 @@
+<%- include('../modules/_header', {page: "Inventories"}); %>
+
+
+<div class="">
+<div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
+    <h1 class="h3 content-header">
+        <i class="ic-archive pr-2"></i>
+        Inventories
+    </h1>
+</div>
+
+<%- include('../modules/_alert'); %>
+<%- include('../modules/_search', {path: 'productList', placeholderText: 'Search Products'}); %>
+<%- include('./_data'); %>
+<%- include('../modules/_pagination', { path: 'inventories'}); %>
+<%- include('../modules/_footer'); %>
+</div>

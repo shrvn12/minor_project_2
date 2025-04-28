@@ -99,12 +99,13 @@ adminControlCreateUserGET: (req, res) => {
 adminControlCreateUserPOST: (req, res) => { 
 
    console.log("Estoy en adminControlCreateUserPOST ....")
-   const { name, email, password, role } = req.body;
+   const { name, email, password, role, address } = req.body;
    const validator = RegisterValidator({
     name,
     email,
     password,
     role,
+    address
    });
   
  
@@ -140,7 +141,7 @@ adminControlCreateUserPOST: (req, res) => {
           "email": validator.value.email,
         "password": hash,
          "role": req.body.role,
-
+          "address": req.body.address
       }, function (error2, data) {
         if (error2) {
           console.log(error2);
@@ -212,7 +213,7 @@ adminControlCreateUserPOST: (req, res) => {
   
     console.group("Voy hacia dashboard .. line 212, paso todos los if ant.")
 
-    req.session.user = { name: user.name, role: user.role };
+    req.session.user = user;
     //res.locals.user = req.session.user;
     
     
@@ -286,12 +287,13 @@ adminControlCreateUserPOST: (req, res) => {
 
 // create action from users - dashboard - view
 create : async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, address } = req.body;
   const validator = RegisterValidator({
     name,
     email,
     password,
     role,
+    address
   });
   if (validator.error) {
     req.flash('error', validator.error);
@@ -309,6 +311,7 @@ create : async (req, res) => {
     email: validator.value.email,
     password: hashedPassword,
     role,
+    address
   });
   try {
     const savedUser = await newUser.save();

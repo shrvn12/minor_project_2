@@ -14,6 +14,13 @@ const userSchema = new mongoose.Schema({
     min: 6,
     max: 100,
   },
+  address:{
+    type: String,
+    required: true,
+    unique: false,
+    min: 6,
+    max: 100,
+  },
   password: {
     type: String,
     required: true,

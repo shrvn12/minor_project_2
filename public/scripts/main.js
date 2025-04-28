@@ -57,6 +57,25 @@ const outputData = (
       queryDatum.addEventListener('click', () => {
         const value = queryDatum.children[0];
         inputQuery.value = value.innerText;
+        if (types == "product"){
+          const rateInputQuery = document.querySelector('.saleForm-rate');
+          const discountInputQuery = document.querySelector('.saleForm-discount');
+          const shippingCostInputQuery = document.querySelector('.saleForm-shippingCost');
+          const paidInputQuery = document.querySelector('.saleForm-paid');
+          const salesDateInputQuery = document.querySelector('.saleForm-salesDate');
+          const quantityInputQuery = document.querySelector('.saleForm-quantity');
+
+          for (let data of matches){
+            if (data.code == value.innerText){
+              rateInputQuery && (rateInputQuery.value = data.rate);
+              discountInputQuery && (discountInputQuery.value = 0);
+              shippingCostInputQuery && (shippingCostInputQuery.value = 0);
+              paidInputQuery && (paidInputQuery.value = data.rate);
+              salesDateInputQuery && (salesDateInputQuery.valueAsDate = new Date());
+              quantityInputQuery && (quantityInputQuery.value = 1);
+            }
+          }
+        }
         queryGroup.innerHTML = '';
       });
     }

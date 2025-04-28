@@ -8,12 +8,13 @@ const {
 const UserController = {};
 
 UserController.create = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, address } = req.body;
   const validator = RegisterValidator({
     name,
     email,
     password,
     role,
+    address
   });
   if (validator.error) {
     req.flash('error', validator.error);
@@ -31,6 +32,7 @@ UserController.create = async (req, res) => {
     email: validator.value.email,
     password: hashedPassword,
     role,
+    address
   });
   try {
     const savedUser = await newUser.save();
@@ -77,7 +79,9 @@ UserController.edit = async (req, res) => {
         
       
       console.log('Estoy en edit UserController - line 72, user: '+ user)
-      
+      if (!user.address){
+        user.address = '';
+      }
        res.render("users/_collect-Edit", {
           currentUser,
           user: user
@@ -97,7 +101,7 @@ UserController.edit = async (req, res) => {
 
 
 UserController.update = async (req, res) => {
-  const { name, password, role } = req.body;
+  const { name, password, role, address } = req.body;
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const user = await User.findByIdAndUpdate(req.params.id, {
@@ -105,6 +109,7 @@ UserController.update = async (req, res) => {
       name,
       password: hashedPassword,
       role,
+      address
     },
   });
   req.flash('success', `User (${user.email}) has been updated successfully!`);
